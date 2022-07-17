@@ -14,6 +14,7 @@ import static hello.jdbc.connection.ConnectionConst.*;
 @Slf4j
 public class ConnectionTest {
 
+    // git connection
     @Test
     void driverManager() throws SQLException {
         Connection con1 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
