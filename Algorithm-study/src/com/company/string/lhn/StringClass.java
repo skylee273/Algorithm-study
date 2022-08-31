@@ -68,4 +68,29 @@ public class StringClass {
         }
         return answer;
     }
+
+
+    private static String solution(String str){
+
+        // IDEA : 특수문자 비교 -> Character.isLetter로 확인
+
+        char[] c = str.toCharArray();
+        int start = 0;
+        int end = c.length - 1;
+        while (start < end) {
+
+            if(!Character.isLetter(c[start])) start++;
+            if(!Character.isLetter(c[end])) end--;
+
+            if (Character.isLetter(c[start]) && Character.isLetter(c[end])) {
+                char tmp = c[start];
+                c[start] = c[end];
+                c[end] = tmp;
+                start++;
+                end--;
+            }
+
+        }
+        return String.valueOf(c);
+    }
 }
