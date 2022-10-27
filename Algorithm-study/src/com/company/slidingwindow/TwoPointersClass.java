@@ -14,6 +14,17 @@ public class TwoPointersClass {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = null;
 
+        /**
+         * list 2차원
+         * 1 -> 1
+         * 2 - > 2
+         * 3 -> 3 3
+         *
+         * visit[101][1]
+         * int visit[3][0]++;
+         * visit[1][0] +1
+         * visit[3][0] +1 +1 = 2
+         */
         ArrayList<Integer>[] list = new ArrayList[101];
         for(int i = 0; i < 101; i++){
             list[i] = new ArrayList<Integer>();
@@ -75,7 +86,6 @@ public class TwoPointersClass {
         Arrays.sort(a);
         Arrays.sort(b);
         int pos1 = 0, pos2 = 0;
-
         while(pos1 < n && pos2 < m){
             if(a[pos1] == b[pos2]) {
                 answer.add(a[pos1++]);
@@ -85,6 +95,82 @@ public class TwoPointersClass {
             else pos2++;
         }
         return answer;
+    }
+
+    private static int solution3 (int n, int k, int [] arr){
+
+        int max = Integer.MIN_VALUE;
+        // n -> 10, k = 3
+        for(int i = 0; i <= n - k; i++) {
+            int sum = 0;
+            for(int j = 0; j < k; ++j){
+                sum += arr[i+j];
+            }
+            max = Math.max(max, sum);
+        }
+
+        return max;
+    }
+
+    private static int solution4 (int n, int m, int [] arr){
+        int cnt = 0;
+        for(int i = 0; i < n; i++) {
+            int sum = 0;
+            for(int j = i; j < n; ++j){
+                sum += arr[j];
+                if(sum > m) break;
+                if(sum == m) {
+                    cnt++;
+                    break;
+                }
+            }
+        }
+        return cnt;
+    }
+
+    private static int solution5 (int n) {
+        /**
+         *                        p1 p1 p1
+         *                     p1 p1 p1 p1
+         *  15           p1 p1 p1 p1 p1 p1
+         *               p0 p0 p0 p0
+         *               1  2  3  4  5  6  7
+         *  N(15)
+         *  sum          1  3  6  10 15
+         *  sum2            2  5  9  14 20
+         *  sum3               3  7  12 18
+         *  sum4                  4  9  15
+         *  cnt          1
+         *
+         *  7 + 8 = 15
+         *  4 + 5 + 6 = 15
+         *  1 + 2 + 3 + 4 + 5 = 15
+         */
+
+        int answer = 0;
+        for(int i = 1; i <= n/2; ++i) {
+            int sum = 0;
+            for(int j = i; j < n; ++j) {
+                sum += j;
+                if(sum > n) break;
+                else if(sum == n) answer++;
+            }
+        }
+        return answer;
+    }
+
+
+    private static int solution6 (int n, int k, int [] arr){
+        int max = 0, cnt = 0, p0 = 0;
+        for(int p1 = 0; p1 < n; p1++) {
+            if(arr[p1] == 0) cnt++;
+            while(cnt > k) {
+                if(arr[p0] == 0) cnt--;
+                p0++;
+            }
+            max = Math.max(max, p1-p0+1);
+        }
+        return max;
     }
 
 }

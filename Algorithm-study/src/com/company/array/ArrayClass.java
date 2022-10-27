@@ -215,6 +215,7 @@ public class ArrayClass {
          * IDEA -> i 번쨰 학생의 k학년과 -> j번학생들의 k학년이 같은지 구하자
          * -> 못푼이유. 2차원 배열까지 사용하고 list에 담아서 하려고 함 -> Runtime 뜸
          * -> 그냥 3차원 배열사용하는것이 메모리 더 작게 듬 ->
+         * list[0].add("")
          */
         int answer = 0, max = Integer.MIN_VALUE;
         for(int i = 1; i <= n; ++i){
