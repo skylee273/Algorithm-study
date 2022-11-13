@@ -76,4 +76,62 @@ public class StackClass {
         return answer;
     }
 
+
+    private static int  solution4(String s) {
+
+        Stack<Integer> st = new Stack<>();
+
+        for (Character c : s.toCharArray()) {
+            if(Character.isDigit(c)) st.push(Integer.valueOf(c.toString()));
+            else{
+                int val1 = st.pop();
+                int val2 = st.pop();
+                int result = 0;
+                if(c == '+') result = val2 + val1;
+                else if(c == '-') result = val2 - val1;
+                else if(c == '*') result = val2 * val1;
+                else result = val2 / val1;
+                st.push(result);
+            }
+        }
+
+        return st.pop();
+    }
+
+    private static final Character OPEN = '(';
+    private static final Character CLOSE = ')';
+    private static int  solution5(String s) {
+
+
+        //  ()(((()())(())()))(())
+
+        /**
+         *     (()())
+         *
+         *
+         *      3 + 4 + 4 + 3 + 2 + 3 + 2 + 2 + 1 + 0 + 1 + 1 + 0
+         *
+         */
+        Stack<Character> stack = new Stack<>();
+
+        // 3 + 3 + 2 + 3 + 2 + 2 + 1 + 0 + 1
+        int answer = 0;
+
+        char[] chars = s.toCharArray();
+        for(int i = 0; i < s.length(); ++i){
+            if(chars[i] == OPEN) stack.push(chars[i]);
+            else{
+                if(chars[i-1] == CLOSE)  {
+                    answer += 1;
+                    stack.pop();
+                }else{
+                    stack.pop();
+                    answer += stack.size();
+                }
+            }
+        }
+        return answer;
+    }
+
+
 }
